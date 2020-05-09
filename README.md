@@ -2,7 +2,6 @@
 淘宝商品评论抓取并生成词云
 
 ## 使用方法
-
 ```sh
 python3 taobao.py itemId sellerId
 ```
@@ -11,7 +10,10 @@ python3 taobao.py itemId sellerId
 
 itemId 和 sellerId 需要自己到淘宝的商品页面用浏览器工具抓取
 
-具体的抓取方法如下，打开淘宝商品页面，如[这个页面](https://detail.tmall.com/item.htm?id=602623204515&ali_refid=a3_430582_1006:1252700148:N:LZBz7CFDX764HvM1ZxL7TQ==:e7dd1540836835ff5cd6d33d48fcbd54&ali_trackid=1_e7dd1540836835ff5cd6d33d48fcbd54&spm=a230r.1.14.1)，打开开发者工具（谷歌浏览器是使用 cmd+option+i），切到 Network 页卡，清空所有请求信息。
+同时你需要修改脚本中 YourCookie 字段
+
+## 如何获取 itemId、selledId 和 Cookie
+具体的抓取方法如下，打开淘宝商品页面，如[这个页面](https://detail.tmall.com/item.htm?spm=a230r.1.14.27.3cba2ff0fBnuTP&id=603314107202&ns=1&abbucket=12&skuId=4225813317223)，打开开发者工具（谷歌浏览器是使用 cmd+option+i），切到 Network 页卡，清空所有请求信息。
 
 接着在输入框输入 "sellerId="，随后点击累计评论，此时会发出请求评论的请求，我们在过滤后的结果中查看，获取对应的 itemId 和 sellerId 即可
 
@@ -22,11 +24,22 @@ itemId 和 sellerId 需要自己到淘宝的商品页面用浏览器工具抓取
 
 ![](fetch_example_3.png)
 
+## 输出结果
+1. 一个 Excel 表格，汇总所有评论（评论时间、评论内容、追加评论和商品分类）
+2. 评论词云
+3. 一个 data.json 的评论数据
 
-## 测试例子
+以[这个页面](https://detail.tmall.com/item.htm?spm=a230r.1.14.27.3cba2ff0fBnuTP&id=603314107202&ns=1&abbucket=12&skuId=4225813317223)为例
+
 ```sh
 python3 taobao.py 603314107202 2064852052
 ```
+
+输出结果为
+
+![](output/603314107202_2064852052/WordCloud.png)
+
+![](excel_example.png)
 
 ## 注意事项
 本脚本内置了我自己假的 Cookie，是无效的，你需要改为自己的
